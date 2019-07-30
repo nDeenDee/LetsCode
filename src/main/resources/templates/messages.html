@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>Messages</p>
+<h1>Add message</h1>
+<form action="#" th:action="@{/addMessage}" th:object="${message}" method="post">
+    <p>Text: <label>
+        <input name="text" type="text" th:field="*{text}"/>
+    </label></p>
+    <p>Tag: <label>
+        <input name="tag" type="text" th:field="*{tag}"/>
+    </label></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset" onclick="customReset()"/></p>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Text</th>
+        <th>Tag</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(messages)}">
+        <td colspan="2"> No Messages</td>
+    </tr>
+    <tr th:each="message : ${messages}">
+        <td><span th:text="${message.text}"> Text </span></td>
+        <td><span th:text="${message.tag}"> Tag </span></td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    function customReset()
+    {
+        document.getElementById("text").value = "";
+        document.getElementById("tag").value = "";
+    }
+</script>
+</body>
+</html>
